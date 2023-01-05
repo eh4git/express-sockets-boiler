@@ -9,22 +9,7 @@ const submitChatEl = byId("submit-chat-input");
 // Gets a name for the user since there are no authenticated users in this application
 // Once set they will not be able to change their name unless they know about local storage
 // If you have your own users there is no need for getName()... just replace all references with equivalents from your user.
-const getName = () => {
-  chatContainerEl.style.display = "none";
-  const name =
-    localStorage.getItem("name") || prompt("What is your name?").trim();
-  if (!name) {
-    alert("You must enter a name to continue...");
-    return getName();
-  } else {
-    localStorage.setItem("name", name);
-    userNameEl.textContent = ", " + name;
-    chatContainerEl.style.display = "block";
-    socket.emit("new-user", name);
-    return name;
-  }
-};
-const userName = getName();
+const userName = getName(); // See ./utils.js for details
 
 const updateHTML = (name, chat, sent) => {
   chatDialogEl.innerHTML += `
@@ -38,16 +23,20 @@ const updateHTML = (name, chat, sent) => {
 
 // emit the new-message event to be broadcast to other users by the server
 submitChatEl.addEventListener("click", () => {
-  updateHTML(userName, chatInputEl.value.trim(), true);
-  socket.emit("new-message", userName, chatInputEl.value.trim());
-  chatInputEl.value = "";
+  const chatInput = chatInputEl.value.trim();
+  if (chatInput) {
+    updateHTML(userName, chatInput, true);
+    socket.emit("new-message", userName, chatInput);
+    chatInputEl.value = "";
+  }
 });
 
-// When a new-user event is sent to the frontend(here) by the server
-socket.on("new-user", arg => {
-  chatDialogEl.innerHTML += `<p>New User ${arg}, has joined the chat!</p>`;
-});
+// When a new-user event is broadcast to the frontend(here) by the server
+socket.on(
+  "new-user",
+  arg =>
+    (chatDialogEl.innerHTML += `<p>New User ${arg}, has joined the chat!</p>`)
+);
 
-socket.on("new-message", args => {
-  updateHTML(args[0], args[1]);
-});
+// When a new message is received from the server(another user)
+socket.on("new-message", args => updateHTML(args[0], args[1]));

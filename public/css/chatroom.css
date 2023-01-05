@@ -27,7 +27,6 @@ aside {
 #user-feedback {
   display: flex;
   justify-content: center;
-  width: 75%;
 }
 
 #chat-input {
@@ -36,12 +35,14 @@ aside {
   border: none;
   border-radius: 10px 0 0 10px;
   border: 1px solid black;
+  border-right: none;
   padding: 10px;
 }
 
 #submit-chat-input {
   width: 30%;
-  border: none;
+  border: 0.1px black solid;
+  border-left: none;
   background-color: rgb(49, 49, 174);
   color: whitesmoke;
   font-size: larger;
@@ -58,13 +59,14 @@ aside {
   align-items: center;
   background-color: rgb(45, 45, 45);
   margin: 5px 0;
+  border-radius: 25px;
 }
 
 .message h4 {
   font-weight: bold;
   color: red;
-  margin-right: 15px;
+  margin: 0 15px 0 15px;
 }
 .message.sent h4 {
-  color: rgb(49, 49, 174);
+  color: green;
 }

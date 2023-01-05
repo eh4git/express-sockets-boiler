@@ -27,3 +27,9 @@ nav li {
   margin: 0 20px;
   font-size: larger;
 }
+
+#intro-text-container {
+  background-color: rgba(0, 0, 0, 0.33);
+  padding: 20px;
+  border-radius: 10px;
+}
