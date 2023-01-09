@@ -55,7 +55,7 @@ aside {
 
 .message {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   align-items: center;
   background-color: rgb(45, 45, 45);
   margin: 5px 0;
