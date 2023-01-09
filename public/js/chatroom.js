@@ -12,10 +12,11 @@ const submitChatEl = byId("submit-chat-input");
 const userName = getName(); // See ./utils.js for details
 
 const updateHTML = (name, chat, sent) => {
+  console.log(chat);
   chatDialogEl.innerHTML += `
   <div class="message${sent ? " sent" : ""}">
     <h4>${name}:</h4>
-    <p>${chat}</p>
+    <p>${chat.text}</p>
   </div>`;
   // Keeps chat scrolling down as new messages created/received.
   chatDialogEl.scrollTop = chatDialogEl.scrollHeight;
@@ -25,7 +26,7 @@ const updateHTML = (name, chat, sent) => {
 submitChatEl.addEventListener("click", () => {
   const chatInput = chatInputEl.value.trim();
   if (chatInput) {
-    updateHTML(userName, chatInput, true);
+    updateHTML(userName, { moderated: false, text: chatInput }, true);
     socket.emit("new-message", userName, chatInput);
     chatInputEl.value = "";
   }
@@ -39,4 +40,6 @@ socket.on(
 );
 
 // When a new message is received from the server(another user)
-socket.on("new-message", args => updateHTML(args[0], args[1]));
+socket.on("new-message", (name, text) => updateHTML(name, text));
+
+socket.on("message-blocked", text => updateHTML("Room Moderator", text));
