@@ -11,7 +11,6 @@ function socketsController(socket) {
   });
 
   socket.on("new-chat-message", async function (name, text) {
-    console.log(name, text);
     const textObj = { moderated: false, text };
     socket.to("chat").emit("new-chat-message", name, textObj);
   });
@@ -22,13 +21,12 @@ function socketsController(socket) {
   });
 
   socket.on("new-moderated-message", async function (name, text) {
-    console.log(name, text);
     const filteredText = await moderateText(
       name,
       await filterObscenities(text)
     );
-    if (filteredText.moderated)
-      socket.to("moderated").emit("message-blocked", filteredText);
+    if (filteredText.moderated) socket.emit("message-blocked", filteredText);
+
     socket.to("moderated").emit("new-moderated-message", name, filteredText);
   });
 

@@ -62,11 +62,17 @@ aside {
   border-radius: 25px;
 }
 
-.message h4 {
+.message > h4 {
   font-weight: bold;
   color: red;
   margin: 0 15px 0 15px;
 }
+
+.message > p {
+  text-align: left;
+  padding-right: 1rem;
+}
+
 .message.sent h4 {
   color: green;
 }
