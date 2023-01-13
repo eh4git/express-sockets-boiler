@@ -1,13 +1,13 @@
 <section id="chat-container">
   <article id="chat-dialog"></article>
-  <div id="user-feedback">
-    <textarea
+  <form id="user-feedback">
+    <input
       name="chat-input"
       id="chat-input"
-      cols="30"
-      rows="5"
+      type="text"
       maxlength="500"
-    ></textarea>
-    <button id="submit-chat-input">Send 🛫</button>
-  </div>
+      minlength="1"
+    ></input>
+    <button type="submit" id="submit-chat-input">Send 🛫</button>
+  </form>
 </section>

@@ -20,12 +20,12 @@ async function moderateText(name, text) {
 
   // console.log("FLAGGED: ", flagged);
   // console.log("CATEGORIES: ", categories);
-  console.log("CATEGORY_SCORES: ", category_scores);
+  // console.log("CATEGORY_SCORES: ", category_scores);
 
   if (flagged) {
     const flaggedResponse = {
       moderated: true,
-      text: `${name}'s content was blocked by OpenAI's GPT-3 for the following reason(s): `,
+      text: `${name}! Your content was blocked by OpenAI's GPT-3 for the following reason(s): `,
     };
     const reasons = Object.entries(categories)
       .map(([key, isFlagged]) => (isFlagged ? key : false))

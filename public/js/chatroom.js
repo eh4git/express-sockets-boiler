@@ -2,6 +2,7 @@ const userNameEl = byId("name");
 const nameInputEl = byId("name-input");
 const checkNameEl = byId("check-name-input");
 const chatContainerEl = byId("chat-container");
+const userFeedBackFormEl = byId("user-feedback");
 const chatDialogEl = byId("chat-dialog");
 const chatInputEl = byId("chat-input");
 const submitChatEl = byId("submit-chat-input");
@@ -14,7 +15,8 @@ const userName = getName(); // See ./utils.js for details
 socket.emit("join-chat", userName);
 
 // emit the new-message event to be broadcast to other users by the server
-submitChatEl.addEventListener("click", () => {
+userFeedBackFormEl.addEventListener("submit", e => {
+  e.preventDefault();
   const chatInput = chatInputEl.value.trim();
   if (chatInput) {
     updateHTML(userName, { moderated: false, text: chatInput }, true);
