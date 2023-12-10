@@ -6,7 +6,6 @@ const openai = new OpenAI({
   organization: process.env.OPENAI_ORG_ID,
   apiKey: process.env.OPENAI_API_KEY,
 });
-// const openai = new OpenAIApi(configuration);
 
 async function moderateText(name, text) {
   try {
@@ -38,10 +37,10 @@ async function moderateText(name, text) {
     moderated: false,
     text,
   };
-
-  // console.log("FLAGGED: ", flagged);
-  // console.log("CATEGORIES: ", categories);
-  // console.log("CATEGORY_SCORES: ", category_scores);
 }
+
+// console.log("FLAGGED: ", flagged);
+// console.log("CATEGORIES: ", categories);
+// console.log("CATEGORY_SCORES: ", category_scores);
 
 module.exports = { moderateText };
