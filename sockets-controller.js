@@ -21,6 +21,7 @@ function socketsController(socket) {
   });
 
   socket.on("new-moderated-message", async function (name, text) {
+    console.log("Moderated message received", await filterObscenities(text));
     const filteredText = await moderateText(
       name,
       await filterObscenities(text)

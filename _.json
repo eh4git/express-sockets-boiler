@@ -1,0 +1,17 @@
+{
+  "type": "function",
+  "function": {
+    "name": "getSubjectOverview",
+    "description": "Provide a high level overview of a particular topic. Break the topic down in to parts in this order: What, Why, How, Additional relevant general facts",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "A topic of software development, for example 'Docker'"
+        },
+        "required": ["subject"]
+      }
+    }
+  }
+}
